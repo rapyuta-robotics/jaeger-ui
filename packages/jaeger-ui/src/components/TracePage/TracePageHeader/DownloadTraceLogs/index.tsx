@@ -16,7 +16,7 @@ type DownloadTraceLogsProps = {
 }
 
 const TIME_SHIFT = 10 * 1000 * 1000; // 10 sec in microseconds;
-const LOGS_CAPACITY = 90 * 60 * 1000; // 90 min in microseconds;
+const LOGS_CAPACITY = 90 * 60 * 1000; // 90 min in milliseconds;
 const CONSOLE_TOKEN_KEY = '_console_token';
 const DEPLOYMENT_ID_KEY = 'rioDeploymentId';
 const PROJECT_ID_KEY = 'rioProjectId';
