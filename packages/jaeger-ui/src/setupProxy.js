@@ -18,7 +18,7 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 module.exports = function setupProxy(app) {
   app.use(
     createProxyMiddleware('/api', {
-      target: 'http://localhost:16686',
+      target: process.env.PROXY_BACKEND_URL,
       logLevel: 'silent',
       secure: false,
       changeOrigin: true,
@@ -28,7 +28,7 @@ module.exports = function setupProxy(app) {
   );
   app.use(
     createProxyMiddleware('/analytics', {
-      target: 'http://localhost:16686',
+      target: process.env.PROXY_BACKEND_URL,
       logLevel: 'silent',
       secure: false,
       changeOrigin: true,
@@ -38,7 +38,7 @@ module.exports = function setupProxy(app) {
   );
   app.use(
     createProxyMiddleware('/serviceedges', {
-      target: 'http://localhost:16686',
+      target: process.env.PROXY_BACKEND_URL,
       logLevel: 'silent',
       secure: false,
       changeOrigin: true,
@@ -48,7 +48,7 @@ module.exports = function setupProxy(app) {
   );
   app.use(
     createProxyMiddleware('/qualitymetrics-v2', {
-      target: 'http://localhost:16686',
+      target: process.env.PROXY_BACKEND_URL,
       logLevel: 'silent',
       secure: false,
       changeOrigin: true,

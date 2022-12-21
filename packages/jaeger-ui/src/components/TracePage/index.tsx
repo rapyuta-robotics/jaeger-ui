@@ -14,7 +14,7 @@
 
 import * as React from 'react';
 import { Input } from 'antd';
-import { Location, History as RouterHistory } from 'history';
+import { History as RouterHistory, Location } from 'history';
 import _clamp from 'lodash/clamp';
 import _get from 'lodash/get';
 import _mapValues from 'lodash/mapValues';
@@ -41,7 +41,7 @@ import { trackSlimHeaderToggle } from './TracePageHeader/TracePageHeader.track';
 import TracePageHeader from './TracePageHeader';
 import TraceTimelineViewer from './TraceTimelineViewer';
 import { actions as timelineActions } from './TraceTimelineViewer/duck';
-import { TUpdateViewRangeTimeFunction, IViewRange, ViewRangeTimeUpdate, ETraceViewType } from './types';
+import { ETraceViewType, IViewRange, TUpdateViewRangeTimeFunction, ViewRangeTimeUpdate } from './types';
 import { getLocation, getUrl } from './url';
 import ErrorMessage from '../common/ErrorMessage';
 import LoadingIndicator from '../common/LoadingIndicator';

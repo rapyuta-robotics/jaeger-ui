@@ -21,6 +21,7 @@ import AccordianReferences from './AccordianReferences';
 import AccordianText from './AccordianText';
 import DetailState from './DetailState';
 import { formatDuration } from '../utils';
+import TraceTime from '../../TraceTime';
 import CopyIcon from '../../../common/CopyIcon';
 import LabeledList from '../../../common/LabeledList';
 
@@ -62,13 +63,15 @@ export default function SpanDetail(props: SpanDetailProps) {
     operationName,
     process,
     duration,
-    relativeStartTime,
+    startTime,
     spanID,
     logs,
     tags,
     warnings,
     references,
   } = span;
+  const hiddenTagsKeys = ['internal.span.format', 'sampler.param', 'sampler.type'];
+  const visibleTags = tags.filter(({ key }) => !hiddenTagsKeys.includes(key));
   const overviewItems = [
     {
       key: 'svc',
@@ -83,7 +86,7 @@ export default function SpanDetail(props: SpanDetailProps) {
     {
       key: 'start',
       label: 'Start Time:',
-      value: formatDuration(relativeStartTime),
+      value: <TraceTime time={startTime} />,
     },
   ];
   const deepLinkCopyText = `${window.location.origin}${window.location.pathname}?uiFind=${spanID}`;
@@ -102,7 +105,7 @@ export default function SpanDetail(props: SpanDetailProps) {
       <div>
         <div>
           <AccordianKeyValues
-            data={tags}
+            data={visibleTags}
             label="Tags"
             linksGetter={linksGetter}
             isOpen={isTagsOpen}

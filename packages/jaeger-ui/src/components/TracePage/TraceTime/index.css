@@ -1,0 +1,27 @@
+.TraceTime--overviewItem {
+  display: inline-flex;
+  align-items: center;
+}
+
+.TraceTime--overviewItem--value {
+  cursor: alias;
+}
+
+.TraceTime--overviewItem--valueDetail {
+  color: #aaa;
+}
+
+.TraceTime--overviewItem--value:hover > .TraceTime--overviewItem--valueDetail {
+  color: unset;
+}
+
+.TraceTime--overviewItem--copy {
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.25rem;
+  cursor: copy;
+}
+
+.TraceTime--overviewItem--copy:hover {
+  color: #aaa;
+}

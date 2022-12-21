@@ -1,0 +1,9 @@
+version: "3.2"
+services:
+  rr-jaeger-ui:
+    image: rrdockerhub/rr-jaeger-ui
+    ports:
+      - "3000:80"
+    environment:
+      - CONSOLE_AUTH_URL=https://garip.apps.okd4v2.prod.rapyuta.io
+      - CONSOLE_URL=https//gacatalog.apps.okd4v2.prod.rapyuta.io

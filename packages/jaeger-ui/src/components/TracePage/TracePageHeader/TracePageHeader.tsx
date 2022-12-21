@@ -26,14 +26,16 @@ import AltViewOptions from './AltViewOptions';
 import KeyboardShortcutsHelp from './KeyboardShortcutsHelp';
 import SpanGraph from './SpanGraph';
 import TracePageSearchBar from './TracePageSearchBar';
-import { TUpdateViewRangeTimeFunction, IViewRange, ViewRangeTimeUpdate, ETraceViewType } from '../types';
+import DownloadTraceLogs from './DownloadTraceLogs';
+import TraceTime from '../TraceTime';
+import { ETraceViewType, IViewRange, TUpdateViewRangeTimeFunction, ViewRangeTimeUpdate } from '../types';
 import LabeledList from '../../common/LabeledList';
 import NewWindowIcon from '../../common/NewWindowIcon';
 import TraceName from '../../common/TraceName';
 import { getTraceName } from '../../../model/trace-viewer';
 import { TNil } from '../../../types';
 import { Trace } from '../../../types/trace';
-import { formatDatetime, formatDuration } from '../../../utils/date';
+import { formatDuration } from '../../../utils/date';
 import { getTraceLinks } from '../../../model/link-patterns';
 
 import './TracePageHeader.css';
@@ -70,18 +72,7 @@ export const HEADER_ITEMS = [
   {
     key: 'timestamp',
     label: 'Trace Start',
-    renderer: (trace: Trace) => {
-      const dateStr = formatDatetime(trace.startTime);
-      const match = dateStr.match(/^(.+)(\.\d+)$/);
-      return match ? (
-        <span className="TracePageHeader--overviewItem--value">
-          {match[1]}
-          <span className="TracePageHeader--overviewItem--valueDetail">{match[2]}</span>
-        </span>
-      ) : (
-        dateStr
-      );
-    },
+    renderer: (trace: Trace) => <TraceTime time={trace.startTime} />,
   },
   {
     key: 'duration',
@@ -179,6 +170,7 @@ export function TracePageHeaderFn(props: TracePageHeaderEmbedProps & { forwarded
         ) : (
           title
         )}
+        <DownloadTraceLogs trace={trace} className="ub-m2"/>
         <TracePageSearchBar
           clearSearch={clearSearch}
           focusUiFindMatches={focusUiFindMatches}
