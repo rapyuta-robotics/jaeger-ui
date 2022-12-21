@@ -1,7 +1,7 @@
 version: "3.2"
 services:
-  rr-jaeger-ui:
-    image: rrdockerhub/rr-jaeger-ui
+  jaeger-ui:
+    image: quay.io/rapyuta/jaeger-ui:dev
     ports:
       - "3000:80"
     environment:

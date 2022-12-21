@@ -120,7 +120,9 @@
     "start:ga-debug": "REACT_APP_GA_DEBUG=1 REACT_APP_VSN_STATE=$(../../scripts/get-tracking-version.js) react-app-rewired start",
     "start": "chmod +x ./env.sh && ./env.sh && cp env-config.js ./public/ && react-app-rewired start",
     "test-dev": "react-app-rewired test --env=jsdom",
-    "test": "CI=1 react-app-rewired test --env=jsdom --color"
+    "test": "CI=1 react-app-rewired test --env=jsdom --color",
+    "build-docker-image": "docker build . -t quay.io/rapyuta/jaeger-ui:dev",
+    "push-docker-image": "docker push quay.io/rapyuta/jaeger-ui:dev"
   },
   "jest": {
     "globalSetup": "./jest.global-setup.js",
