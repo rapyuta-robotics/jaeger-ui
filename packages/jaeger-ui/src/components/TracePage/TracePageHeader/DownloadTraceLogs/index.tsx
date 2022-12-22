@@ -42,8 +42,9 @@ const DownloadTraceLogs = ({ trace, className }: DownloadTraceLogsProps) => {
   };
 
   const showLoginModal = () => {
-    setOptionsFormIsVisible(false);
-    setLoginFormIsVisible(true);
+    // TODO: hack
+    setOptionsFormIsVisible(true);
+    setLoginFormIsVisible(false);
   };
 
   const closeLoginModal = () => {
@@ -93,33 +94,33 @@ const DownloadTraceLogs = ({ trace, className }: DownloadTraceLogsProps) => {
 
     const authToken = sessionStorage.getItem(CONSOLE_TOKEN_KEY);
 
-    if (authToken) {
-      Promise.all(timeChains.map(({ start, end }) => {
-        // @ts-ignore
-        return fetch(`${window._env_.CONSOLE_URL}/logs/project`, {
-          method: 'post',
-          headers: {
-            project: projectId,
-            Authorization: authToken,
-          },
-          body: JSON.stringify({
-            deployments: deploymentIds.map(deploymentId => ({ deploymentId })),
-            type: 'both',
-            startTime: start,
-            endTime: end,
-          }),
-        }).then(response => {
-          if (response.ok) {
-            return response.blob();
-          }
+    // if (authToken) {
+    Promise.all(timeChains.map(({ start, end }) => {
+      // @ts-ignore
+      return fetch(`${window._env_.AUTH_PROXY_URL}/logs/project`, {
+        method: 'post',
+        headers: {
+          project: projectId,
+          // Authorization: authToken,
+        },
+        body: JSON.stringify({
+          deployments: deploymentIds.map(deploymentId => ({ deploymentId })),
+          type: 'both',
+          startTime: start,
+          endTime: end,
+        }),
+      }).then(response => {
+        if (response.ok) {
+          return response.blob();
+        }
 
-          throw new Error(response.statusText);
-        }).then(blob => downloadBlob(blob, `${trace.traceID}.tar`));
-      })).catch(() => {
-        sessionStorage.removeItem(CONSOLE_TOKEN_KEY);
-        showLoginModal();
-      });
-    }
+        throw new Error(response.statusText);
+      }).then(blob => downloadBlob(blob, `${trace.traceID}.tar`));
+    })).catch(() => {
+      sessionStorage.removeItem(CONSOLE_TOKEN_KEY);
+      showLoginModal();
+    });
+    // }
   };
 
   const downloadLogsHandler = () => {

@@ -1,12 +1,12 @@
 # => Run builded container
-FROM nginx:1.15.2-alpine
+FROM nginx:1.23-alpine
 
 # Nginx config
 RUN rm -rf /etc/nginx/conf.d
 COPY conf /etc/nginx
 
 # Static build
-COPY build /usr/share/nginx/html/
+COPY build /usr/share/nginx/html
 
 # Default port exposure
 EXPOSE 80
