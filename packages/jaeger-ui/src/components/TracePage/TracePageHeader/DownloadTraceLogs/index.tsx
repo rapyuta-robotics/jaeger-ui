@@ -97,7 +97,7 @@ const DownloadTraceLogs = ({ trace, className }: DownloadTraceLogsProps) => {
     // if (authToken) {
     Promise.all(timeChains.map(({ start, end }) => {
       // @ts-ignore
-      return fetch(`${window._env_.AUTH_PROXY_URL}/logs/project`, {
+      return fetch('/logs/project', {
         method: 'post',
         headers: {
           project: projectId,

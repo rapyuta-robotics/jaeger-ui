@@ -16,7 +16,7 @@ services:
   logs_authproxy:
     image: quay.io/rapyuta/logs_authproxy:latest
     ports:
-      - "8050:8080"
+      - "9050:8080"
     environment:
       - RIO_TENANT_ID=${RIO_TENANT_ID}
       - TOKEN=${TOKEN}
@@ -25,5 +25,3 @@ services:
     image: quay.io/rapyuta/jaeger-ui:dev
     ports:
       - "3050:80"
-    environment:
-      - AUTH_PROXY_URL=http://localhost:8050

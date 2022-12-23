@@ -56,4 +56,14 @@ module.exports = function setupProxy(app) {
       xfwd: true,
     })
   );
+  app.use(
+    createProxyMiddleware('/logs', {
+      target: process.env.DEV_PROXY_LOGS_PATH,
+      logLevel: 'silent',
+      secure: false,
+      changeOrigin: true,
+      ws: true,
+      xfwd: true,
+    })
+  );
 };
