@@ -9,14 +9,14 @@ services:
       - ES_MAX_SPAN_AGE=1440h0m0s
       - ES_NUM_REPLICAS=0
       - ES_NUM_SHARDS=1
-      - ES_SERVER_URLS=http://trace-es.logging.svc:9200
+      - ES_SERVER_URLS=http://trace-esb-kqdbp.ep-r.io
       - QUERY_ADDITIONAL_HEADERS=Access-Control-Allow-Origin:*
       - SPAN_STORAGE_TYPE=elasticsearch
 
   logs_authproxy:
     image: quay.io/rapyuta/logs_authproxy:latest
     ports:
-      - "9050:8080"
+      - "8080:8080"
     environment:
       - RIO_TENANT_ID=${RIO_TENANT_ID}
       - TOKEN=${TOKEN}
@@ -24,4 +24,4 @@ services:
   jaeger-ui:
     image: quay.io/rapyuta/jaeger-ui:dev
     ports:
-      - "3050:80"
+      - "9090:9090"
