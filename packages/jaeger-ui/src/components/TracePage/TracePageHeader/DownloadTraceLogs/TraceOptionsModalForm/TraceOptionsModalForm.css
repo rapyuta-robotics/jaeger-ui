@@ -1,0 +1,8 @@
+.TraceOptionsModalForm--times {
+  display: flex;
+  justify-content: space-between;
+}
+
+.TraceOptionsModalForm--times .ant-row {
+  width: 48%;
+}

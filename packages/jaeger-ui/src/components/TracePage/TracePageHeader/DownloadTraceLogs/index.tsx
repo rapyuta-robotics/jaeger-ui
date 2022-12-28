@@ -15,7 +15,6 @@ type DownloadTraceLogsProps = {
   className?: string;
 }
 
-const TIME_SHIFT = 10 * 1000 * 1000; // 10 sec in microseconds;
 const LOGS_CAPACITY = 90 * 60 * 1000; // 90 min in milliseconds;
 const CONSOLE_TOKEN_KEY = '_console_token';
 const DEPLOYMENT_ID_KEY = 'rioDeploymentId';
@@ -36,8 +35,8 @@ const DownloadTraceLogs = ({ trace, className }: DownloadTraceLogsProps) => {
   }));
 
   const defaultOptions = {
-    startTime: (trace.startTime - TIME_SHIFT) / 1000, // to milliseconds
-    endTime: (trace.endTime + TIME_SHIFT) / 1000, // to milliseconds
+    startTime: trace.startTime / 1000, // to milliseconds
+    endTime: trace.endTime / 1000, // to milliseconds
     deploymentIds: [...deploymentIdsSet],
   };
 
