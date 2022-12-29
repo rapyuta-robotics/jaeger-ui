@@ -29,6 +29,7 @@ import { TNil } from '../../../../types';
 import { KeyValuePair, Link, Log, Span } from '../../../../types/trace';
 
 import './index.css';
+import DownloadTraceLogs from '../../TracePageHeader/DownloadTraceLogs';
 
 type SpanDetailProps = {
   detailState: DetailState;
@@ -95,6 +96,12 @@ export default function SpanDetail(props: SpanDetailProps) {
     <div>
       <div className="ub-flex ub-items-center">
         <h2 className="ub-flex-auto ub-m0">{operationName}</h2>
+        <DownloadTraceLogs
+          logsStartTime={startTime}
+          logsEndTime={startTime + duration}
+          logsProcesses={[process]}
+          className="ub-m2"
+        />
         <LabeledList
           className="ub-tx-right-align"
           dividerClassName="SpanDetail--divider"

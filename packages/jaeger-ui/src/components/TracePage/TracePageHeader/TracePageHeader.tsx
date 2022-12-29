@@ -170,7 +170,12 @@ export function TracePageHeaderFn(props: TracePageHeaderEmbedProps & { forwarded
         ) : (
           title
         )}
-        <DownloadTraceLogs trace={trace} className="ub-m2"/>
+        <DownloadTraceLogs
+          logsStartTime={trace.startTime}
+          logsEndTime={trace.endTime}
+          logsProcesses={Object.values(trace.processes)}
+          className="ub-m2"
+        />
         <TracePageSearchBar
           clearSearch={clearSearch}
           focusUiFindMatches={focusUiFindMatches}
