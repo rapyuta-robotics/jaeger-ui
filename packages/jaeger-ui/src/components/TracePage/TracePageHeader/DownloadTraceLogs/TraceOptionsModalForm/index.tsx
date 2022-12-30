@@ -27,17 +27,14 @@ type TraceOptionsModalFormProps = FormComponentProps & {
   defaultOptions: TraceOptions;
 };
 
-const DEFAULT_TIME_SHIFT = 10 * 1000; // 10 sec in milliseconds
+const DEFAULT_TIME_BUFFER = 30 * 1000; // 30 sec in milliseconds
 
-const timeShifts = [{
+const timeBuffers = [{
   label: 'Custom',
   value: 0,
 }, {
-  label: '10 sec',
-  value: DEFAULT_TIME_SHIFT,
-}, {
   label: '30 sec',
-  value: 30 * 1000,
+  value: DEFAULT_TIME_BUFFER,
 }, {
   label: '1 min',
   value: 60 * 1000,
@@ -62,9 +59,9 @@ const TraceOptionsModalForm = (props: TraceOptionsModalFormProps) => {
   React.useEffect(() => {
     if (visible) {
       form.setFieldsValue({
-        startTime: moment(defaultOptions.startTime - DEFAULT_TIME_SHIFT),
-        endTime: moment(defaultOptions.endTime + DEFAULT_TIME_SHIFT),
-        timeShift: DEFAULT_TIME_SHIFT,
+        startTime: moment(defaultOptions.startTime - DEFAULT_TIME_BUFFER),
+        endTime: moment(defaultOptions.endTime + DEFAULT_TIME_BUFFER),
+        timeBuffer: DEFAULT_TIME_BUFFER,
         deploymentIds: defaultOptions.deploymentIds,
       });
     }
@@ -72,16 +69,16 @@ const TraceOptionsModalForm = (props: TraceOptionsModalFormProps) => {
 
   const timeChangeHandler = () => {
     form.setFieldsValue({
-      timeShift: 0,
+      timeBuffer: 0,
     });
   };
 
-  const timeShiftChangeHandler = (nextValue: any) => {
-    const nextTimeShift = nextValue as number;
+  const timeBufferChangeHandler = (nextValue: any) => {
+    const nextTimeBuffer = nextValue as number;
 
     form.setFieldsValue({
-      startTime: moment(defaultOptions.startTime).subtract(nextTimeShift, 'milliseconds'),
-      endTime: moment(defaultOptions.endTime).add(nextTimeShift, 'milliseconds'),
+      startTime: moment(defaultOptions.startTime).subtract(nextTimeBuffer, 'milliseconds'),
+      endTime: moment(defaultOptions.endTime).add(nextTimeBuffer, 'milliseconds'),
     });
   };
 
@@ -147,15 +144,15 @@ const TraceOptionsModalForm = (props: TraceOptionsModalFormProps) => {
             )}
           </Form.Item>
         </div>
-        <Form.Item label='Time Shift'>
-          {form.getFieldDecorator('timeShift', {
+        <Form.Item label='Time Buffer'>
+          {form.getFieldDecorator('timeBuffer', {
             rules: [{
               required: true,
-              message: 'Please fill time shift!',
+              message: 'Please fill time buffer!',
             }],
           })(
-            <Select style={{ width: '100%' }} onChange={timeShiftChangeHandler}>
-              {timeShifts.map(({ label, value }) => (
+            <Select style={{ width: '100%' }} onChange={timeBufferChangeHandler}>
+              {timeBuffers.map(({ label, value }) => (
                 <Option key={value} value={value}>
                   {label}
                 </Option>
